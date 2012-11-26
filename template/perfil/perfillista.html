@@ -1,0 +1,45 @@
+{%extends "base.html" %}
+{% load thumbnail %}
+{%block titulo%}<title>Lista da Equipe</title>{%endblock%}
+{% block menu%}
+<li><a href="/">Inicio</a></li>
+<li><a href="/mapa/">Mapa</a></li>
+{%if login%}
+             <li class="dropdown active">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Equipe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/perfil/">Lista</a></li>
+                  <li><a href="/perfil/editar/">Editar Meu Perfil</a></li>
+                </ul>
+              </li>
+{%else%}
+<li class="active"><a href="/perfil/">Equipe</a></li>
+{%endif%}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">SQL <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/sql/historico/">Historico</a></li>
+                  <li><a href="/sql/">Executar Comandos</a></li>
+                </ul>
+              </li>
+{%endblock%}
+
+{%block corpo%}
+	{%for usuario in usuario_list%}
+		{%for usuario_extra in usuario_extra_list%}
+			{%if usuario.id = usuario_extra.user_id%}
+				<div class="row well" style="height=auto;"><img src="{% thumbnail usuario_extra.image 200x200 crop %}" style="vertical-align:middle;" class="pull-right">	<div class="span6"><h3>{{ usuario.first_name }} {{ usuario.last_name }}</h3></div>
+				      <div class="span6">				    
+				      	Email: <a href="mailto:{{ usuario.email }}">{{usuario.email}}</a><br />
+				      	Cargo: {{ usuario_extra.get_funcao_display }}<br />
+				        Função: {{ usuario_extra.get_cargo_display }}<br />
+				        Biografia: <pre style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;border:0;margin:0;">{{ usuario_extra.biografia}}</pre>
+				        {%if login == usuario %}<a href="/perfil/editar">Editar</a><br />{%endif%}
+				       	
+				       </div>
+				      
+				    </div>
+
+			{%endif%}{%endfor%}
+	{%endfor%}
+{%endblock%}

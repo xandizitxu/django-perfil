@@ -1,0 +1,52 @@
+{%extends "base.html"%}
+{%load staticfiles%}
+{%block titulo%}<title>Cadastro de Usuário</title>{%endblock%}
+{%block corpo%}
+
+<form enctype="multipart/form-data" action="" method="post" class="form-horizontal well"><h2>Solicitar Usuário</h2>
+    {% csrf_token %}
+	{% for field in form %}
+        {%if field.errors%}
+        	{%for error in field.errors %}
+        	    <div class="control-group error"> 
+        	    	<label class="control-label" for="inputWarning">{{ field.label }}</label>
+        	    	<div class="controls">
+          				<span class="inputError">{{ field }}</span>
+          			    <span class="help-inline">{{ error }}</span>
+        			</div>
+                </div>
+        	{% endfor %}
+        {%else%}
+      			<div class="control-group">
+        			<label class="control-label" for="input01">{{ field.label }}</label>
+        			<div class="controls">
+          				{{ field }}
+         			</div>
+        		</div>
+        {%endif%}
+	{% endfor %}       
+    <div class="form-actions">
+    	<button type="submit" class="btn btn-primary">Solicitar Cadastro</button>
+    </div>
+</form>
+{%endblock%}
+
+{%block extrajs%}
+<script type="text/javascript" src="{%static "js/jquery.mask.js"%}"/></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#cpf").mask("999.999.999-99");
+});
+</script>
+{%endblock%}
+{% block menu%}
+  <li><a href="/">Voltar</a></li>
+{%endblock%}
+{%block extracss%}
+<style>
+  .alert-block a:link {color: #FFFFFF;}
+  .alert-block a:visited {color: #FFFFFF;}
+  .alert-block a:hover {color: #FFFFFF;}
+  .alert-block a:active {color: #FFFFFF;}
+</style>
+{%endblock%}

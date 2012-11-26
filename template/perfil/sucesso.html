@@ -1,0 +1,11 @@
+{%extends "base.html"%}
+{%block titulo%}
+<title>{{usuario}} - Sua conta ainda não está ativa</title>
+{%endblock%}
+{%load staticfiles%}
+{%block corpo%}
+<div id="form-horizontal well"><h1>Solicitação de Cadastro com Sucesso</h1><span>{{ usuario }}, sua solicitação foi realizada com sucesso, foi enviado um email para o administrador com a sua solicitação para ativar a sua conta para que você possa utilizar do programa.<p>Para conferir se seu cadastro já está ativado visite <a href="/perfil/sucesso/{{usuario}}">este link.</div>
+{%endblock%}
+{% block menu%}
+  <li><a href="/">Voltar</a></li>
+{%endblock%}

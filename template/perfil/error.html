@@ -1,0 +1,11 @@
+{%extends "base.html"%}
+{%block titulo%}
+<title>ERROR - Sua conta está ativa</title>
+{%endblock%}
+{% block menu%}
+  <li><a href="/">Voltar</a></li>
+{%endblock%}
+{%load staticfiles%}
+{%block corpo%}
+<div id="form-horizontal well"><h1>Erro na Solicitação</h1><span>O usuário {{ usuario }} já tem sua conta ativada</div>
+{%endblock%}
